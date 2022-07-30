@@ -11,7 +11,12 @@ ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 
 RUN if [ ${ARCH} = "armv7hf" ] ; then [ "cross-build-start" ] ; fi
 
-RUN pip3 install cryptography==3.4.6 
+RUN apt-get install -y build-essential libssl-dev libffi-dev \
+    python3-dev cargo
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+RUN pip3 install --upgrade pip
 RUN pip3 install wheel \
     && pip3 wheel ${PKG}==${PKG_VERSION} --wheel-dir=/tmp/build-${PKG}
 RUN if [ ${ARCH} = "armv7hf" ] ; then [ "cross-build-end" ] ; fi
