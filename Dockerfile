@@ -11,6 +11,8 @@ ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 
 RUN if [ ${ARCH} = "armv7hf" ] ; then [ "cross-build-start" ] ; fi
 
+RUN apt update
+
 RUN apt-get install -y build-essential libssl-dev libffi-dev \
     python3-dev cargo
 
