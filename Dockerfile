@@ -11,6 +11,7 @@ ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 
 RUN if [ ${ARCH} = "armv7hf" ] ; then [ "cross-build-start" ] ; fi
 
+RUN pip3 install --upgrade pip
 RUN pip3 install wheel \
     && pip3 wheel ${PKG}==${PKG_VERSION} --wheel-dir=/tmp/build-${PKG}
 RUN if [ ${ARCH} = "armv7hf" ] ; then [ "cross-build-end" ] ; fi
